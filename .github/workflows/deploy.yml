@@ -28,11 +28,6 @@ jobs:
 
       - uses: google-github-actions/setup-gcloud@v2
 
-      - name: Debug auth
-        run: |
-          gcloud auth list
-          gcloud config get-value project
-
       - name: Configure Docker
         run: gcloud auth configure-docker asia-southeast1-docker.pkg.dev --quiet
 
@@ -43,16 +38,29 @@ jobs:
           docker push $IMAGE:latest
 
       - name: Deploy to Cloud Run
+        env:
+          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
         run: |
+          python3 -c "
+          import os, yaml
+          env = {
+              'GOOGLE_CREDENTIALS_JSON': os.environ['GOOGLE_CREDENTIALS_JSON'],
+              'GOOGLE_SHEET_ID': os.environ['GOOGLE_SHEET_ID'],
+              'GOOGLE_DRIVE_FOLDER_ID': os.environ['GOOGLE_DRIVE_FOLDER_ID'],
+              'ADMIN_PASSWORD': os.environ['ADMIN_PASSWORD'],
+          }
+          with open('/tmp/env.yaml', 'w') as f:
+              yaml.dump(env, f)
+          "
           gcloud run deploy $SERVICE \
             --image $IMAGE:${{ github.sha }} \
             --region $REGION \
             --platform managed \
             --allow-unauthenticated \
-            --set-env-vars "GOOGLE_CREDENTIALS_JSON=${{ secrets.GOOGLE_CREDENTIALS_JSON }}" \
-            --set-env-vars "GOOGLE_SHEET_ID=${{ secrets.GOOGLE_SHEET_ID }}" \
-            --set-env-vars "GOOGLE_DRIVE_FOLDER_ID=${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}" \
-            --set-env-vars "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" \
+            --env-vars-file /tmp/env.yaml \
             --memory 512Mi \
             --min-instances 0 \
             --max-instances 3
