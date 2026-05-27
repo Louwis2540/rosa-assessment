@@ -1,0 +1,1816 @@
+{% extends "base.html" %}
+{% block title %}ระบบประเมิน ROSA{% endblock %}
+
+{% block content %}
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 1: หน้าหลัก
+═══════════════════════════════════════════════════════════ -->
+<div id="view-home" class="app-view">
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <!-- Animated background -->
+    <div class="hero-bg">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+
+    <!-- SVG Ergonomic Illustration -->
+    <div style="position:absolute;right:0;bottom:0;width:55%;max-width:700px;opacity:0.12;pointer-events:none;z-index:1;">
+      <svg viewBox="0 0 700 450" xmlns="http://www.w3.org/2000/svg" fill="white">
+        <!-- Desk -->
+        <rect x="100" y="250" width="500" height="16" rx="6"/>
+        <rect x="130" y="266" width="18" height="140" rx="5"/>
+        <rect x="552" y="266" width="18" height="140" rx="5"/>
+        <!-- Monitor stand -->
+        <rect x="388" y="155" width="12" height="95" rx="4"/>
+        <rect x="355" y="232" width="78" height="10" rx="4"/>
+        <!-- Monitor -->
+        <rect x="308" y="70" width="172" height="118" rx="10"/>
+        <rect x="316" y="78" width="156" height="102" rx="6" fill="none" stroke="white" stroke-width="3" opacity="0.5"/>
+        <!-- Keyboard -->
+        <rect x="240" y="256" width="175" height="22" rx="6"/>
+        <rect x="248" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <rect x="274" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <rect x="300" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <rect x="326" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <rect x="352" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <rect x="378" y="263" width="20" height="8" rx="2" fill="rgba(0,0,0,0.2)"/>
+        <!-- Mouse -->
+        <ellipse cx="448" cy="262" rx="22" ry="14"/>
+        <!-- Chair back -->
+        <rect x="115" y="140" width="28" height="130" rx="12"/>
+        <!-- Chair seat -->
+        <rect x="108" y="262" width="115" height="22" rx="10"/>
+        <!-- Chair leg front -->
+        <rect x="120" y="284" width="10" height="80" rx="4"/>
+        <rect x="205" y="284" width="10" height="80" rx="4"/>
+        <!-- Chair base star -->
+        <ellipse cx="162" cy="368" rx="65" ry="8" opacity="0.6"/>
+        <!-- Person body -->
+        <ellipse cx="195" cy="105" rx="30" ry="33"/>
+        <rect x="172" y="135" width="18" height="20" rx="5"/>
+        <!-- Torso -->
+        <path d="M160 155 Q180 200 178 255 Q155 262 138 260 Q130 205 148 155 Z"/>
+        <!-- Right arm -->
+        <path d="M178 175 Q215 195 240 258" stroke="white" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <!-- Left arm -->
+        <path d="M162 175 Q148 200 145 240" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <!-- Legs -->
+        <path d="M148 258 Q152 295 168 325 Q176 325 180 322 Q170 292 168 258 Z"/>
+        <path d="M168 258 Q180 295 185 325 Q193 326 196 322 Q185 292 178 258 Z"/>
+        <!-- Feet -->
+        <ellipse cx="174" cy="328" rx="26" ry="9"/>
+        <ellipse cx="192" cy="328" rx="24" ry="9"/>
+        <!-- Angle arc 90° knee -->
+        <path d="M185 295 A30 30 0 0 1 215 295" stroke="white" stroke-width="2" fill="none" stroke-dasharray="4,3"/>
+        <text x="195" y="285" fill="white" font-size="18" font-weight="bold" opacity="0.9">90°</text>
+        <!-- Spine angle -->
+        <path d="M165 155 L165 260" stroke="white" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+      </svg>
+    </div>
+
+    <div class="container position-relative" style="z-index:2;">
+      <div class="row align-items-center min-vh-75">
+        <div class="col-lg-7 hero-content py-5">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="hero-badge">
+              <i class="bi bi-hospital me-1"></i>กรมควบคุมโรค กระทรวงสาธารณสุข
+            </span>
+            <span class="hero-badge" style="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);">
+              <i class="bi bi-geo-alt me-1"></i>สคร.7 ขอนแก่น
+            </span>
+          </div>
+          <h1 class="hero-title mb-3">
+            ประเมินความเสี่ยง<br>
+            <span>ด้านการยศาสตร์</span><br>
+            สำหรับพนักงานสำนักงาน
+          </h1>
+          <p class="hero-subtitle mb-4">
+            แบบประเมิน <strong>ROSA</strong> (Rapid Office Strain Assessment)
+            วิเคราะห์ท่าทางการทำงานครอบคลุม เก้าอี้ หน้าจอ โทรศัพท์ เมาส์ และคีย์บอร์ด
+            พร้อมคำแนะนำเฉพาะบุคคล ใช้เวลาเพียง 5–10 นาที
+          </p>
+          <div class="hero-cta d-flex flex-wrap gap-3 mb-5">
+            <button onclick="showView('assess')" class="btn btn-hero">
+              <i class="bi bi-play-fill me-2"></i>เริ่มทำแบบประเมิน
+            </button>
+            <a href="#scope" class="btn btn-outline-light px-4" style="border-radius:50px;">
+              <i class="bi bi-info-circle me-1"></i>รายละเอียด
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scope / Features Section -->
+  <section class="scope-section" id="scope">
+    <div class="container">
+      <div class="text-center mb-5">
+        <div class="scope-badge">ขอบเขตการประเมิน</div>
+        <h2 class="fw-bold" style="color:var(--gov-navy);">ครอบคลุมทุกจุดเสี่ยงของสถานีงาน</h2>
+        <p class="text-muted">วิเคราะห์ท่าทางและอุปกรณ์ตามหลักการยศาสตร์สากล</p>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-4 animate-delay-1" style="animation: fadeInUp 0.6s ease both;">
+          <div class="scope-card card">
+            <div class="card-top" style="background:var(--gov-navy);"></div>
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="width:50px;height:50px;background:var(--gov-blue-soft);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--gov-navy);">
+                  <i class="bi bi-person-workspace"></i>
+                </div>
+                <div>
+                  <div class="fw-bold" style="color:var(--gov-navy);">ส่วน A – เก้าอี้</div>
+                  <div class="small text-muted">Chair Assessment</div>
+                </div>
+              </div>
+              <ul class="list-unstyled small mb-0">
+                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>ความสูงของเบาะนั่ง</li>
+                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>ความลึกของเบาะนั่ง</li>
+                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>ที่พักแขน</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>พนักพิงหลัง</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 animate-delay-2" style="animation: fadeInUp 0.6s ease both;">
+          <div class="scope-card card">
+            <div class="card-top" style="background:#1a7a3e;"></div>
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="width:50px;height:50px;background:#e8f5ee;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#1a7a3e;">
+                  <i class="bi bi-display"></i>
+                </div>
+                <div>
+                  <div class="fw-bold" style="color:#1a7a3e;">ส่วน B – หน้าจอ/โทรศัพท์</div>
+                  <div class="small text-muted">Monitor & Phone</div>
+                </div>
+              </div>
+              <ul class="list-unstyled small mb-0">
+                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>ตำแหน่งและระยะจอภาพ</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>การใช้โทรศัพท์</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 animate-delay-3" style="animation: fadeInUp 0.6s ease both;">
+          <div class="scope-card card">
+            <div class="card-top" style="background:#a01a1a;"></div>
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center gap-3 mb-3">
+                <div style="width:50px;height:50px;background:#fdeaea;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#a01a1a;">
+                  <i class="bi bi-mouse"></i>
+                </div>
+                <div>
+                  <div class="fw-bold" style="color:#a01a1a;">ส่วน C – เมาส์/คีย์บอร์ด</div>
+                  <div class="small text-muted">Mouse & Keyboard</div>
+                </div>
+              </div>
+              <ul class="list-unstyled small mb-0">
+                <li class="mb-1"><i class="bi bi-check-circle-fill text-success me-2"></i>ตำแหน่งเมาส์</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i>ตำแหน่งคีย์บอร์ด</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-2">
+        <button onclick="showView('assess')" class="btn btn-hero px-5">
+          <i class="bi bi-play-fill me-2"></i>เริ่มทำแบบประเมินเลย
+        </button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 2: แบบประเมิน
+═══════════════════════════════════════════════════════════ -->
+<div id="view-assess" class="app-view d-none container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+
+      <!-- Progress tracker -->
+      <div class="assess-progress-wrap mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="fw-bold" style="color:var(--gov-navy);" id="step-label">ขั้นตอนที่ 1 จาก 5</span>
+          <span class="small fw-semibold" style="color:var(--gov-gold);" id="step-pct">20%</span>
+        </div>
+        <div class="progress mb-3" style="height:10px;border-radius:10px;background:#d4e3f5;">
+          <div class="progress-bar" id="progress-bar"
+               style="width:20%;transition:width 0.4s;background:linear-gradient(90deg,var(--gov-navy) 0%,var(--gov-navy-mid) 100%);border-radius:10px;"></div>
+        </div>
+        <div class="step-dots-wrap">
+          <span class="step-dot active" data-step="1">ข้อมูลส่วนตัว</span>
+          <span class="step-dot" data-step="2">ส่วน A เก้าอี้</span>
+          <span class="step-dot" data-step="3">ส่วน B หน้าจอ</span>
+          <span class="step-dot" data-step="4">ส่วน C เมาส์</span>
+          <span class="step-dot" data-step="5">ยืนยัน</span>
+        </div>
+      </div>
+
+      <form id="rosa-form">
+
+        <!-- ── STEP 1: ข้อมูลส่วนตัว ── -->
+        <div class="step-panel" id="step-1">
+          <div class="card assess-card">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0"><i class="bi bi-person-fill me-2"></i>ข้อมูลส่วนตัวผู้รับการประเมิน</h5>
+            </div>
+            <div class="card-body p-4">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">ชื่อ-สกุล <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="p-name" required placeholder="ชื่อ นามสกุล"/>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-semibold">เพศ <span class="text-danger">*</span></label>
+                  <select class="form-select" id="p-gender" required>
+                    <option value="">-- เลือก --</option>
+                    <option>ชาย</option><option>หญิง</option><option>ไม่ระบุ</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label fw-semibold">อายุ (ปี) <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="p-age" min="18" max="80" required/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">น้ำหนัก (kg) <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="p-weight" min="30" max="200" step="0.1" required/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">ส่วนสูง (cm) <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="p-height" min="100" max="220" step="0.1" required/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">รอบเอว (นิ้ว) <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="p-waist" min="20" max="80" step="0.1" required/>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">ประเภทงาน/อาชีพ <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="p-job" required placeholder="เช่น นักวิชาการสาธารณสุข"/>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label fw-semibold">แผนก/หน่วยงาน <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="p-dept" required placeholder="เช่น กลุ่มโรคจากการประกอบอาชีพ"/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">อายุงาน (ปี)</label>
+                  <input type="number" class="form-control" id="p-work-years" min="0" max="50" value="0"/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">อายุงาน (เดือน)</label>
+                  <input type="number" class="form-control" id="p-work-months" min="0" max="11" value="0"/>
+                </div>
+                <div class="col-md-4">
+                  <label class="form-label fw-semibold">ชั่วโมงใช้คอมพิวเตอร์/วัน <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="p-comp-hrs" min="0" max="16" step="0.5" required/>
+                </div>
+                <div class="col-12">
+                  <label class="form-label fw-semibold">โรคประจำตัว (เลือกได้หลายข้อ)</label>
+                  <div class="row g-2">
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="เบาหวาน" id="d1"><label class="form-check-label" for="d1">เบาหวาน</label></div></div>
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="ความดันโลหิตสูง" id="d2"><label class="form-check-label" for="d2">ความดันโลหิตสูง</label></div></div>
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="ไขมันในเลือดสูง" id="d3"><label class="form-check-label" for="d3">ไขมันในเลือดสูง</label></div></div>
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="โรคกระดูก/กล้ามเนื้อ" id="d4"><label class="form-check-label" for="d4">กระดูก/กล้ามเนื้อ</label></div></div>
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="โรคหัวใจ" id="d5"><label class="form-check-label" for="d5">โรคหัวใจ</label></div></div>
+                    <div class="col-md-3"><div class="form-check"><input class="form-check-input disease-cb" type="checkbox" value="ไม่มี" id="d0"><label class="form-check-label" for="d0">ไม่มี</label></div></div>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control form-control-sm" id="p-disease-other" placeholder="อื่นๆ โปรดระบุ..."/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 2: ส่วน A เก้าอี้ ── -->
+        <div class="step-panel d-none" id="step-2">
+          <div class="card assess-card">
+            <div class="card-header section-a-header text-white">
+              <h5 class="mb-0"><i class="bi bi-person-workspace me-2"></i>ส่วน A – เก้าอี้ (Chair)</h5>
+            </div>
+            <div class="card-body p-4">
+
+              <!-- A1 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-primary">A1. ความสูงของเบาะ (Chair Height)</h6>
+                <p class="text-muted small mb-3">สังเกตท่านั่งของผู้ปฏิบัติงาน</p>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="option-card" data-group="chair_height_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/chair_height_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>เข่าอยู่ในมุม 90° พอดี</strong><br><small class="text-muted">เท้าวางราบกับพื้น ต้นขาขนานพื้น</small></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="chair_height_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/chair_height_low.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>เตี้ยเกินไป</strong><br><small class="text-muted">มุมเข่า &lt; 90°</small></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="chair_height_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/chair_height_high.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>สูงเกินไป</strong><br><small class="text-muted">มุมเข่า &gt; 90°</small></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="option-card" data-group="chair_height_base" data-value="3">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/chair_height_nofeet.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>เท้าไม่ถึงพื้น</strong><br><small class="text-muted">ขาห้อยในอากาศ ไม่มีที่วางเท้า</small></div>
+                        <span class="badge bg-danger flex-shrink-0">คะแนน 3</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="chair_height_base"/>
+                <div class="mt-3">
+                  <label class="modifier-row" for="chair_under_desk">
+                    <input class="form-check-input mt-0" type="checkbox" id="chair_under_desk">
+                    <img src="/static/images/rosa/chair_under_desk.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> ขาชนใต้โต๊ะ / ใต้โต๊ะแคบ ไม่สามารถไขว้ขาได้</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- A2 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-primary">A2. ความลึกของเบาะ (Seat Pan Depth)</h6>
+                <p class="text-muted small mb-3">ระยะห่างระหว่างขอบเบาะด้านในกับหลังเข่า</p>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="option-card" data-group="pan_depth_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/pan_depth_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>พอดี ~3 นิ้ว (7.5 ซม.)</strong><br><small class="text-muted">มีช่องว่างระหว่างขอบเบาะกับหลังเข่า</small></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="pan_depth_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/pan_depth_long.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ลึกเกินไป</strong><br><small class="text-muted">ช่องว่างน้อยกว่า 3 นิ้ว</small></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="pan_depth_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/pan_depth_short.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ตื้นเกินไป</strong><br><small class="text-muted">ช่องว่างมากกว่า 3 นิ้ว</small></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="pan_depth_base"/>
+                <div class="mt-2">
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="pan_non_adjustable">
+                    <label class="form-check-label" for="pan_non_adjustable"><strong>(+1)</strong> ปรับความลึกเบาะไม่ได้</label>
+                  </div>
+                </div>
+              </div>
+
+              <!-- A3 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-primary">A3. แขนพัก (Armrests)</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="armrest_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/armrest_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ข้อศอกพักพอดี ไหล่ผ่อนคลาย</strong></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="armrest_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/armrest_high.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>สูง/ต่ำเกิน หรือไม่มีแขนพัก</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="armrest_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม (เลือกได้หลายข้อ):</p>
+                  <label class="modifier-row" for="armrest_hard_surface">
+                    <input class="form-check-input mt-0" type="checkbox" id="armrest_hard_surface">
+                    <img src="/static/images/rosa/armrest_hard.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> พื้นผิวแข็งหรือชำรุด</span>
+                  </label>
+                  <label class="modifier-row" for="armrest_too_wide">
+                    <input class="form-check-input mt-0" type="checkbox" id="armrest_too_wide">
+                    <img src="/static/images/rosa/armrest_wide.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> แขนพักกว้างเกิน ทำให้ไหล่ห่าง</span>
+                  </label>
+                  <label class="modifier-row" for="armrest_non_adjustable">
+                    <input class="form-check-input mt-0" type="checkbox" id="armrest_non_adjustable">
+                    <span><strong>(+1)</strong> ปรับแขนพักไม่ได้</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- A4 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-primary">A4. พนักพิง (Back Support)</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="back_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/back_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>รองรับเอวได้ดี เอน 95°-110°</strong></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="back_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/back_no_lumbar.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ไม่มีรองรับเอว</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="back_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/back_angled.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>เอนหน้า/หลังมากเกิน</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="back_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/back_none.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ไม่มีพนักพิงเลย</strong></div>
+                        <span class="badge bg-danger flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="back_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม:</p>
+                  <label class="modifier-row" for="back_surface_too_high">
+                    <input class="form-check-input mt-0" type="checkbox" id="back_surface_too_high">
+                    <img src="/static/images/rosa/back_surface_high.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> โต๊ะสูงเกิน ทำให้ต้องยกไหล่</span>
+                  </label>
+                  <label class="modifier-row" for="back_non_adjustable">
+                    <input class="form-check-input mt-0" type="checkbox" id="back_non_adjustable">
+                    <span><strong>(+1)</strong> ปรับพนักพิงไม่ได้</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Duration A -->
+              <div class="question-block">
+                <h6 class="fw-bold text-primary"><i class="bi bi-clock me-1"></i>ระยะเวลาการนั่งทำงาน</h6>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="chair_duration" data-value="-1">
+                      <div class="text-center"><span class="badge bg-secondary mb-1">-1</span>
+                      <div class="small">น้อยกว่า 30 นาทีต่อเนื่อง<br>หรือ น้อยกว่า 1 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="chair_duration" data-value="0">
+                      <div class="text-center"><span class="badge bg-primary mb-1">0</span>
+                      <div class="small">30 นาที – 1 ชั่วโมงต่อเนื่อง<br>หรือ 1-4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="chair_duration" data-value="1">
+                      <div class="text-center"><span class="badge bg-danger mb-1">+1</span>
+                      <div class="small">มากกว่า 1 ชั่วโมงต่อเนื่อง<br>หรือ มากกว่า 4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="chair_duration"/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 3: ส่วน B หน้าจอ/โทรศัพท์ ── -->
+        <div class="step-panel d-none" id="step-3">
+          <div class="card assess-card">
+            <div class="card-header section-b-header text-white">
+              <h5 class="mb-0"><i class="bi bi-display me-2"></i>ส่วน B – หน้าจอและโทรศัพท์</h5>
+            </div>
+            <div class="card-body p-4">
+
+              <!-- B1 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-success">B1. หน้าจอคอมพิวเตอร์ (Monitor)</h6>
+                <div class="row g-3">
+                  <div class="col-12">
+                    <div class="option-card" data-group="monitor_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/monitor_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ตำแหน่งเหมาะสม</strong><br><small class="text-muted">ระยะ 40-75 ซม. หน้าจออยู่ระดับสายตา</small></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="monitor_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/monitor_low.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ต่ำเกินไป</strong><br><small class="text-muted">ก้มศีรษะมากกว่า 30°</small></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="monitor_base" data-value="3">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/monitor_high.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>สูงเกินไป</strong><br><small class="text-muted">เงยศีรษะขึ้น</small></div>
+                        <span class="badge bg-danger flex-shrink-0">คะแนน 3</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="monitor_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม:</p>
+                  <label class="modifier-row" for="monitor_too_far">
+                    <input class="form-check-input mt-0" type="checkbox" id="monitor_too_far">
+                    <span><strong>(+1)</strong> ระยะไกลเกิน (&gt;75 ซม.)</span>
+                  </label>
+                  <label class="modifier-row" for="monitor_neck_twist">
+                    <input class="form-check-input mt-0" type="checkbox" id="monitor_neck_twist">
+                    <img src="/static/images/rosa/monitor_neck_twist.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> บิดคอมากกว่า 30°</span>
+                  </label>
+                  <label class="modifier-row" for="monitor_glare">
+                    <input class="form-check-input mt-0" type="checkbox" id="monitor_glare">
+                    <img src="/static/images/rosa/monitor_glare.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> มีแสงสะท้อนบนหน้าจอ</span>
+                  </label>
+                  <label class="modifier-row" for="monitor_no_doc_holder">
+                    <input class="form-check-input mt-0" type="checkbox" id="monitor_no_doc_holder">
+                    <img src="/static/images/rosa/monitor_no_holder.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> ไม่มีที่วางเอกสาร</span>
+                  </label>
+                  <label class="modifier-row" for="monitor_non_adjustable">
+                    <input class="form-check-input mt-0" type="checkbox" id="monitor_non_adjustable">
+                    <span><strong>(+1)</strong> ปรับหน้าจอไม่ได้</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- B2 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-success">B2. โทรศัพท์ (Telephone)</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="phone_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/phone_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ใช้หูฟัง หรือถือด้วยมือ คอตรง</strong></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="phone_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/phone_far.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ต้องเอื้อมหยิบโทรศัพท์</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="phone_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม:</p>
+                  <label class="modifier-row" for="phone_neck_shoulder">
+                    <input class="form-check-input mt-0" type="checkbox" id="phone_neck_shoulder">
+                    <img src="/static/images/rosa/phone_neck.png" class="modifier-img" alt="">
+                    <span><strong>(+2)</strong> หนีบโทรศัพท์ด้วยคอและไหล่</span>
+                  </label>
+                  <label class="modifier-row" for="phone_no_hands_free">
+                    <input class="form-check-input mt-0" type="checkbox" id="phone_no_hands_free">
+                    <span><strong>(+1)</strong> ไม่มีอุปกรณ์ Hands-Free</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Duration B -->
+              <div class="question-block">
+                <h6 class="fw-bold text-success"><i class="bi bi-clock me-1"></i>ระยะเวลาการใช้หน้าจอและโทรศัพท์</h6>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_b_duration" data-value="-1">
+                      <div class="text-center"><span class="badge bg-secondary mb-1">-1</span>
+                      <div class="small">น้อยกว่า 30 นาทีต่อเนื่อง<br>หรือ น้อยกว่า 1 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_b_duration" data-value="0">
+                      <div class="text-center"><span class="badge bg-primary mb-1">0</span>
+                      <div class="small">30 นาที – 1 ชั่วโมงต่อเนื่อง<br>หรือ 1-4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_b_duration" data-value="1">
+                      <div class="text-center"><span class="badge bg-danger mb-1">+1</span>
+                      <div class="small">มากกว่า 1 ชั่วโมงต่อเนื่อง<br>หรือ มากกว่า 4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="section_b_duration"/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 4: ส่วน C เมาส์/คีย์บอร์ด ── -->
+        <div class="step-panel d-none" id="step-4">
+          <div class="card assess-card">
+            <div class="card-header section-c-header text-white">
+              <h5 class="mb-0"><i class="bi bi-mouse me-2"></i>ส่วน C – เมาส์และคีย์บอร์ด</h5>
+            </div>
+            <div class="card-body p-4">
+
+              <!-- C1 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-danger">C1. เมาส์ (Mouse)</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="mouse_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/mouse_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>เมาส์อยู่ในแนวเดียวกับไหล่</strong><br><small class="text-muted">ข้อศอกงอ ~90°</small></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="mouse_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/mouse_reach.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ต้องเอื้อมมือไปใช้เมาส์</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="mouse_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม:</p>
+                  <label class="modifier-row" for="mouse_diff_surfaces">
+                    <input class="form-check-input mt-0" type="checkbox" id="mouse_diff_surfaces">
+                    <img src="/static/images/rosa/mouse_diff_surfaces.png" class="modifier-img" alt="">
+                    <span><strong>(+2)</strong> เมาส์และคีย์บอร์ดอยู่คนละระดับ</span>
+                  </label>
+                  <label class="modifier-row" for="mouse_pinch_grip">
+                    <input class="form-check-input mt-0" type="checkbox" id="mouse_pinch_grip">
+                    <img src="/static/images/rosa/mouse_pinch.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> จับเมาส์แบบหยิก (Pinch Grip)</span>
+                  </label>
+                  <label class="modifier-row" for="mouse_palmrest">
+                    <input class="form-check-input mt-0" type="checkbox" id="mouse_palmrest">
+                    <img src="/static/images/rosa/mouse_palmrest.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> ที่รองฝ่ามืออยู่ด้านหน้าเมาส์</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- C2 -->
+              <div class="question-block mb-4">
+                <h6 class="fw-bold text-danger">C2. คีย์บอร์ด (Keyboard)</h6>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="keyboard_base" data-value="1">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/keyboard_good.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ข้อมือตรง ไหล่ผ่อนคลาย</strong></div>
+                        <span class="badge bg-success flex-shrink-0">คะแนน 1</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="option-card" data-group="keyboard_base" data-value="2">
+                      <div class="d-flex align-items-center gap-3">
+                        <img src="/static/images/rosa/keyboard_extended.png" class="option-img" alt="">
+                        <div class="flex-grow-1"><strong>ข้อมือแอ่นขึ้น หรือคีย์บอร์ดเอียง &gt;15°</strong></div>
+                        <span class="badge bg-warning text-dark flex-shrink-0">คะแนน 2</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="keyboard_base"/>
+                <div class="mt-3">
+                  <p class="small fw-semibold mb-2 text-muted">ปัจจัยเพิ่มเติม:</p>
+                  <label class="modifier-row" for="keyboard_deviation">
+                    <input class="form-check-input mt-0" type="checkbox" id="keyboard_deviation">
+                    <img src="/static/images/rosa/keyboard_deviation.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> ข้อมือบิดขณะพิมพ์</span>
+                  </label>
+                  <label class="modifier-row" for="keyboard_too_high">
+                    <input class="form-check-input mt-0" type="checkbox" id="keyboard_too_high">
+                    <img src="/static/images/rosa/keyboard_too_high.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> คีย์บอร์ดสูงเกิน ไหล่ยก</span>
+                  </label>
+                  <label class="modifier-row" for="keyboard_overhead">
+                    <input class="form-check-input mt-0" type="checkbox" id="keyboard_overhead">
+                    <img src="/static/images/rosa/keyboard_overhead.png" class="modifier-img" alt="">
+                    <span><strong>(+1)</strong> ต้องเอื้อมหยิบของสูงบ่อย</span>
+                  </label>
+                  <label class="modifier-row" for="keyboard_non_adjustable">
+                    <input class="form-check-input mt-0" type="checkbox" id="keyboard_non_adjustable">
+                    <span><strong>(+1)</strong> ปรับระดับแป้นพิมพ์ไม่ได้</span>
+                  </label>
+                </div>
+              </div>
+
+              <!-- Duration C -->
+              <div class="question-block">
+                <h6 class="fw-bold text-danger"><i class="bi bi-clock me-1"></i>ระยะเวลาการใช้เมาส์และคีย์บอร์ด</h6>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_c_duration" data-value="-1">
+                      <div class="text-center"><span class="badge bg-secondary mb-1">-1</span>
+                      <div class="small">น้อยกว่า 30 นาทีต่อเนื่อง<br>หรือ น้อยกว่า 1 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_c_duration" data-value="0">
+                      <div class="text-center"><span class="badge bg-primary mb-1">0</span>
+                      <div class="small">30 นาที – 1 ชั่วโมงต่อเนื่อง<br>หรือ 1-4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="option-card duration-card" data-group="section_c_duration" data-value="1">
+                      <div class="text-center"><span class="badge bg-danger mb-1">+1</span>
+                      <div class="small">มากกว่า 1 ชั่วโมงต่อเนื่อง<br>หรือ มากกว่า 4 ชั่วโมง/วัน</div></div>
+                    </div>
+                  </div>
+                </div>
+                <input type="hidden" id="section_c_duration"/>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- ── STEP 5: ยืนยัน ── -->
+        <div class="step-panel d-none" id="step-5">
+          <div class="card assess-card">
+            <div class="card-header bg-dark text-white">
+              <h5 class="mb-0"><i class="bi bi-check2-circle me-2"></i>ยืนยันและส่งแบบประเมิน</h5>
+            </div>
+            <div class="card-body p-4">
+              <div id="review-summary"></div>
+              <div class="alert alert-info mt-3">
+                <i class="bi bi-info-circle me-2"></i>
+                กรุณาตรวจสอบข้อมูลก่อนส่ง ระบบจะบันทึกผลลงฐานข้อมูลและสร้าง PDF โดยอัตโนมัติ
+              </div>
+              <div class="d-grid mt-3">
+                <button type="button" id="submit-btn" class="btn btn-lg fw-bold text-white py-3"
+                        style="background:linear-gradient(135deg,#1a7a3e 0%,#28a745 100%);border:none;border-radius:12px;font-size:1.1rem;">
+                  <i class="bi bi-send-fill me-2"></i>ส่งแบบประเมิน
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" id="prev-btn" class="btn btn-outline-secondary btn-assess-nav" disabled>
+            <i class="bi bi-arrow-left me-2"></i>ย้อนกลับ
+          </button>
+          <button type="button" id="next-btn" class="btn btn-assess-nav text-white fw-bold"
+                  style="background:linear-gradient(135deg,var(--gov-navy) 0%,var(--gov-navy-mid) 100%);border:none;min-width:140px;">
+            ถัดไป<i class="bi bi-arrow-right ms-2"></i>
+          </button>
+        </div>
+      </form>
+
+      <!-- Loading Overlay -->
+      <div id="loading-overlay" class="d-none">
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary mb-3" style="width:3rem;height:3rem;"></div>
+          <p class="fw-bold">กำลังคำนวณผลและสร้าง PDF...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 3: ผลการประเมิน
+═══════════════════════════════════════════════════════════ -->
+<div id="view-result" class="app-view d-none container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+
+      <div class="text-center mb-4">
+        <i class="bi bi-clipboard2-check-fill text-primary" style="font-size:3.5rem;"></i>
+        <h2 class="fw-bold mt-2">ผลการประเมิน ROSA</h2>
+        <p class="text-muted" id="r-name-date"></p>
+      </div>
+
+      <div class="card border-0 shadow mb-4" id="r-score-card">
+        <div class="card-body text-center py-5">
+          <p class="text-muted mb-1">ROSA Final Score</p>
+          <div class="display-1 fw-bold" id="r-final-score"></div>
+          <div class="fs-4 fw-bold mt-2" id="r-risk-badge"></div>
+          <hr class="my-3"/>
+          <p class="mb-1" id="r-risk-desc"></p>
+          <p class="fw-semibold" id="r-risk-action"></p>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light fw-bold">คะแนนแต่ละส่วน</div>
+        <div class="card-body">
+          <div class="row g-3 text-center">
+            <div class="col-6 col-md-3">
+              <div class="p-3 rounded bg-primary bg-opacity-10">
+                <div class="h3 fw-bold text-primary" id="r-sec-a"></div>
+                <small>Section A<br>เก้าอี้</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 rounded bg-success bg-opacity-10">
+                <div class="h3 fw-bold text-success" id="r-sec-b"></div>
+                <small>Section B<br>หน้าจอ/โทรศัพท์</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 rounded bg-danger bg-opacity-10">
+                <div class="h3 fw-bold text-danger" id="r-sec-c"></div>
+                <small>Section C<br>เมาส์/คีย์บอร์ด</small>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="p-3 rounded bg-warning bg-opacity-10">
+                <div class="h3 fw-bold text-warning" id="r-sec-d"></div>
+                <small>Section D<br>รวม B+C</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light fw-bold">รายละเอียดคะแนน</div>
+        <div class="card-body p-0">
+          <table class="table table-sm table-hover mb-0">
+            <thead class="table-light"><tr><th>รายการ</th><th class="text-center">คะแนน</th></tr></thead>
+            <tbody id="r-detail-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mb-4">
+        <div class="card-header bg-light fw-bold"><i class="bi bi-lightbulb me-1"></i>ข้อแนะนำในการปรับปรุง</div>
+        <div class="card-body" id="r-recommendations"></div>
+      </div>
+
+      <div class="d-flex flex-wrap gap-2 justify-content-center">
+        <a id="r-pdf-btn" href="#" class="btn btn-danger" target="_blank">
+          <i class="bi bi-file-earmark-pdf me-1"></i>ดาวน์โหลด PDF
+        </a>
+        <button onclick="resetAndAssess()" class="btn btn-primary">
+          <i class="bi bi-plus-circle me-1"></i>ประเมินรายถัดไป
+        </button>
+        <button onclick="showView('home')" class="btn btn-outline-secondary">
+          <i class="bi bi-house me-1"></i>หน้าหลัก
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 4: Admin Login
+═══════════════════════════════════════════════════════════ -->
+<div id="view-login" class="app-view d-none container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+          <h5 class="mb-0"><i class="bi bi-lock me-2"></i>Admin Login</h5>
+        </div>
+        <div class="card-body p-4">
+          <div id="login-error" class="alert alert-danger py-2 small d-none">รหัสผ่านไม่ถูกต้อง</div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">รหัสผ่าน</label>
+            <input type="password" id="login-pw" class="form-control" placeholder="Admin password"
+                   onkeydown="if(event.key==='Enter') doLogin()"/>
+          </div>
+          <button class="btn btn-primary w-100" onclick="doLogin()">
+            <i class="bi bi-box-arrow-in-right me-1"></i>เข้าสู่ระบบ
+          </button>
+          <div class="text-center mt-3">
+            <button class="btn btn-link btn-sm text-muted" onclick="showView('home')">ย้อนกลับหน้าหลัก</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 5: Dashboard
+═══════════════════════════════════════════════════════════ -->
+<div id="view-dashboard" class="app-view d-none container-fluid py-4">
+  <div class="d-flex align-items-center justify-content-between mb-4 flex-wrap gap-2">
+    <h3 class="fw-bold mb-0"><i class="bi bi-bar-chart-line me-2 text-primary"></i>Dashboard – ผลการประเมิน ROSA</h3>
+    <div class="d-flex gap-2">
+      <button class="btn btn-outline-secondary btn-sm" onclick="showAdminImages()">
+        <i class="bi bi-image me-1"></i>จัดการรูปภาพ
+      </button>
+      <button class="btn btn-success btn-sm" onclick="exportCSV()">
+        <i class="bi bi-download me-1"></i>Export CSV
+      </button>
+      <button class="btn btn-outline-danger btn-sm" onclick="adminLogout()">
+        <i class="bi bi-box-arrow-right me-1"></i>ออกจากระบบ
+      </button>
+    </div>
+  </div>
+
+  <!-- Summary cards (rendered by JS) -->
+  <div class="row g-3 mb-4" id="db-summary"></div>
+
+  <!-- Filter -->
+  <div class="card shadow-sm mb-3">
+    <div class="card-body py-2">
+      <div class="row g-2 align-items-center">
+        <div class="col-md-4">
+          <input type="text" class="form-control form-control-sm" id="search-input" placeholder="🔍 ค้นหาชื่อ / แผนก..."/>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select form-select-sm" id="risk-filter">
+            <option value="">ทุกระดับความเสี่ยง</option>
+            <option>ต่ำ</option><option>ปานกลาง</option><option>สูง</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <span class="text-muted small" id="db-loading"><i class="bi bi-arrow-repeat"></i> กำลังโหลด...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover table-sm mb-0" id="records-table">
+          <thead class="table-dark">
+            <tr>
+              <th>#</th><th>วันที่</th><th>ชื่อ-สกุล</th><th>แผนก</th><th>อาชีพ</th>
+              <th class="text-center">A</th><th class="text-center">B</th>
+              <th class="text-center">C</th><th class="text-center">D</th>
+              <th class="text-center">ROSA</th><th class="text-center">ความเสี่ยง</th><th>PDF</th>
+            </tr>
+          </thead>
+          <tbody id="db-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     VIEW 6: Admin Images
+═══════════════════════════════════════════════════════════ -->
+<div id="view-admin-images" class="app-view d-none container-fluid py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h4 class="mb-0"><i class="bi bi-image me-2"></i>จัดการรูปภาพตัวเลือก ROSA</h4>
+    <div class="d-flex gap-2">
+      <button onclick="showView('dashboard');loadDashboard()" class="btn btn-outline-secondary btn-sm">
+        <i class="bi bi-arrow-left me-1"></i>Dashboard
+      </button>
+    </div>
+  </div>
+
+  <div id="ai-no-pdf" class="alert alert-warning d-none">
+    <i class="bi bi-exclamation-triangle me-2"></i>
+    ไม่พบไฟล์ภาพ PDF ฉบับเต็ม — Re-crop จะยังไม่สามารถใช้งานได้
+  </div>
+
+  <div class="alert alert-info py-2 small mb-4">
+    <i class="bi bi-info-circle me-1"></i>
+    คลิกที่รูปใดก็ได้เพื่อเปิดตัวแก้ไข — <strong>Re-crop</strong> จาก PDF หรือ <strong>Upload</strong> รูปใหม่
+  </div>
+
+  <div id="ai-grid"></div>
+</div>
+
+<!-- Editor Modal (Admin Images) -->
+<div class="modal fade" id="editorModal" tabindex="-1" data-bs-backdrop="static">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header bg-dark text-white py-2">
+        <h6 class="modal-title mb-0"><i class="bi bi-crop me-2"></i>แก้ไขรูป: <span id="ed-label"></span></h6>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="row g-0" style="min-height:480px;">
+          <div class="col-lg-8 border-end" style="overflow:auto;background:#555;position:relative;">
+            <div class="p-2 bg-dark text-white small d-flex align-items-center gap-3">
+              <span><i class="bi bi-arrows-move me-1"></i>ลากเพื่อเลือกพื้นที่ crop ใหม่</span>
+              <span class="ms-auto text-warning small" id="pdf-status"></span>
+            </div>
+            <div style="position:relative;display:inline-block;">
+              <img id="full-page-img" src="/static/images/rosa/page_1_full.png"
+                   style="display:block;max-width:100%;cursor:crosshair;" draggable="false" alt="ROSA Worksheet">
+              <canvas id="crop-canvas" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-4 p-3 d-flex flex-column gap-3">
+            <div>
+              <div class="fw-semibold small mb-1">รูปปัจจุบัน</div>
+              <div class="border rounded p-2 text-center bg-light">
+                <img id="current-preview" src="" style="max-height:120px;max-width:100%;object-fit:contain;" alt="">
+              </div>
+            </div>
+            <div>
+              <div class="fw-semibold small mb-2"><i class="bi bi-crop me-1"></i>พิกัด Crop (pixels)</div>
+              <div class="row g-2">
+                <div class="col-6"><label class="form-label small mb-0">X ซ้าย (x0)</label>
+                  <input type="number" id="ed-x0" class="form-control form-control-sm" oninput="coordChanged()"></div>
+                <div class="col-6"><label class="form-label small mb-0">Y บน (y0)</label>
+                  <input type="number" id="ed-y0" class="form-control form-control-sm" oninput="coordChanged()"></div>
+                <div class="col-6"><label class="form-label small mb-0">X ขวา (x1)</label>
+                  <input type="number" id="ed-x1" class="form-control form-control-sm" oninput="coordChanged()"></div>
+                <div class="col-6"><label class="form-label small mb-0">Y ล่าง (y1)</label>
+                  <input type="number" id="ed-y1" class="form-control form-control-sm" oninput="coordChanged()"></div>
+              </div>
+              <div class="text-muted small mt-1" id="ed-size-info"></div>
+            </div>
+            <div>
+              <div class="fw-semibold small mb-1">Preview (crop ใหม่)</div>
+              <div class="border rounded p-2 text-center bg-light" style="min-height:80px;">
+                <canvas id="preview-canvas" style="max-width:100%;max-height:120px;"></canvas>
+              </div>
+            </div>
+            <div class="d-grid gap-2 mt-auto">
+              <button class="btn btn-primary btn-sm" onclick="saveCrop()">
+                <i class="bi bi-scissors me-1"></i>บันทึก Crop ใหม่
+              </button>
+              <hr class="my-1">
+              <div class="fw-semibold small">หรือ Upload รูปแทนที่</div>
+              <div class="input-group input-group-sm">
+                <input type="file" class="form-control" id="upload-file" accept="image/*">
+                <button class="btn btn-outline-secondary" onclick="uploadImage()"><i class="bi bi-upload"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer py-2">
+        <div id="ed-msg" class="me-auto small"></div>
+        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+'use strict';
+
+/* ══════════════════════════════════════════════
+   ROUTING
+══════════════════════════════════════════════ */
+function showView(name) {
+  document.querySelectorAll('.app-view').forEach(v => v.classList.add('d-none'));
+  document.getElementById('view-' + name).classList.remove('d-none');
+  history.pushState(null, '', name === 'home' ? '/' : '/' + name);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Init view based on current URL path — deferred until all JS is loaded
+function initView() {
+  const path = location.pathname;
+  if (path.startsWith('/result')) {
+    _origShowView('result');
+    renderResult(JSON.parse(sessionStorage.getItem('rosa_result') || 'null'));
+  } else if (path.startsWith('/assess')) {
+    _origShowView('assess');
+    initAssessment();
+  } else if (path.startsWith('/dashboard')) {
+    requireAdmin('dashboard');
+  } else if (path.startsWith('/admin/images')) {
+    requireAdmin('admin-images');
+  } else {
+    _origShowView('home');
+  }
+}
+
+window.addEventListener('popstate', () => {
+  const path = location.pathname;
+  if (path.startsWith('/result')) showView('result');
+  else if (path.startsWith('/assess')) showView('assess');
+  else showView('home');
+});
+
+/* ══════════════════════════════════════════════
+   ASSESSMENT
+══════════════════════════════════════════════ */
+let currentStep = 1;
+const TOTAL_STEPS = 5;
+
+function initAssessment() {
+  currentStep = 1;
+  showStep(1);
+}
+
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach((p, i) => {
+    p.classList.toggle('d-none', i + 1 !== n);
+  });
+  document.getElementById('prev-btn').disabled = (n === 1);
+  const nextBtn = document.getElementById('next-btn');
+  if (n === TOTAL_STEPS) {
+    nextBtn.classList.add('d-none');
+  } else {
+    nextBtn.classList.remove('d-none');
+    nextBtn.textContent = 'ถัดไป →';
+  }
+  const pct = Math.round((n / TOTAL_STEPS) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('step-label').textContent = `ขั้นตอนที่ ${n} จาก ${TOTAL_STEPS}`;
+  document.getElementById('step-pct').textContent = pct + '%';
+  document.querySelectorAll('.step-dot').forEach((d, i) => {
+    d.classList.remove('active', 'done');
+    if (i + 1 === n) d.classList.add('active');
+    else if (i + 1 < n) d.classList.add('done');
+  });
+  if (n === TOTAL_STEPS) buildReviewSummary();
+}
+
+// Option card click
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.option-card');
+  if (!card || !card.dataset.group) return;
+  document.querySelectorAll(`.option-card[data-group="${card.dataset.group}"]`)
+    .forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  const hidden = document.getElementById(card.dataset.group);
+  if (hidden) hidden.value = card.dataset.value;
+});
+
+// Navigation
+document.getElementById('next-btn').addEventListener('click', () => {
+  if (!validateStep(currentStep)) return;
+  if (currentStep < TOTAL_STEPS) { currentStep++; showStep(currentStep); }
+});
+document.getElementById('prev-btn').addEventListener('click', () => {
+  if (currentStep > 1) { currentStep--; showStep(currentStep); }
+});
+
+function validateStep(n) {
+  if (n === 1) {
+    const fields = ['p-name','p-gender','p-age','p-weight','p-height','p-waist','p-job','p-dept','p-comp-hrs'];
+    for (const id of fields) {
+      const el = document.getElementById(id);
+      if (!el || !el.value.trim()) {
+        alert(`กรุณากรอกข้อมูล: ${el?.previousElementSibling?.textContent || id}`);
+        el?.focus(); return false;
+      }
+    }
+    return true;
+  }
+  if (n === 2) return checkHiddens(['chair_height_base','pan_depth_base','armrest_base','back_base','chair_duration']);
+  if (n === 3) return checkHiddens(['monitor_base','phone_base','section_b_duration']);
+  if (n === 4) return checkHiddens(['mouse_base','keyboard_base','section_c_duration']);
+  return true;
+}
+
+function checkHiddens(ids) {
+  for (const id of ids) {
+    const el = document.getElementById(id);
+    if (!el || el.value === '') {
+      alert(`กรุณาเลือกคำตอบสำหรับ: ${id.replace(/_/g,' ')}`);
+      return false;
+    }
+  }
+  return true;
+}
+
+function buildReviewSummary() {
+  const p  = collectPersonal();
+  const ch = collectChair();
+  const mp = collectMonitorPhone();
+  const mk = collectMouseKeyboard();
+  document.getElementById('review-summary').innerHTML = `
+    <div class="row g-3">
+      <div class="col-md-6"><div class="card border-primary h-100">
+        <div class="card-header bg-primary text-white small fw-bold">ข้อมูลส่วนตัว</div>
+        <div class="card-body small">
+          <b>ชื่อ:</b> ${p.name}<br>
+          <b>เพศ:</b> ${p.gender} &nbsp;<b>อายุ:</b> ${p.age} ปี<br>
+          <b>น้ำหนัก:</b> ${p.weight} kg &nbsp;<b>ส่วนสูง:</b> ${p.height} cm<br>
+          <b>อาชีพ:</b> ${p.job_type} &nbsp;<b>แผนก:</b> ${p.department}
+        </div></div></div>
+      <div class="col-md-6"><div class="card border-info h-100">
+        <div class="card-header bg-info text-white small fw-bold">ส่วน A – เก้าอี้</div>
+        <div class="card-body small">
+          <b>ความสูงเบาะ:</b> ${ch.chair_height_base} &nbsp;<b>ความลึก:</b> ${ch.pan_depth_base}<br>
+          <b>แขนพัก:</b> ${ch.armrest_base} &nbsp;<b>พนักพิง:</b> ${ch.back_base}<br>
+          <b>Duration:</b> ${ch.chair_duration > 0 ? '+' : ''}${ch.chair_duration}
+        </div></div></div>
+      <div class="col-md-6"><div class="card border-success h-100">
+        <div class="card-header bg-success text-white small fw-bold">ส่วน B – หน้าจอ/โทรศัพท์</div>
+        <div class="card-body small">
+          <b>หน้าจอ:</b> ${mp.monitor_base} &nbsp;<b>โทรศัพท์:</b> ${mp.phone_base}<br>
+          <b>Duration:</b> ${mp.section_b_duration > 0 ? '+' : ''}${mp.section_b_duration}
+        </div></div></div>
+      <div class="col-md-6"><div class="card border-danger h-100">
+        <div class="card-header bg-danger text-white small fw-bold">ส่วน C – เมาส์/คีย์บอร์ด</div>
+        <div class="card-body small">
+          <b>เมาส์:</b> ${mk.mouse_base} &nbsp;<b>คีย์บอร์ด:</b> ${mk.keyboard_base}<br>
+          <b>Duration:</b> ${mk.section_c_duration > 0 ? '+' : ''}${mk.section_c_duration}
+        </div></div></div>
+    </div>`;
+}
+
+function hv(id) { return document.getElementById(id)?.value; }
+function cb(id) { return document.getElementById(id)?.checked || false; }
+
+function collectPersonal() {
+  return {
+    name:           document.getElementById('p-name').value.trim(),
+    gender:         document.getElementById('p-gender').value,
+    age:            parseInt(document.getElementById('p-age').value),
+    weight:         parseFloat(document.getElementById('p-weight').value),
+    height:         parseFloat(document.getElementById('p-height').value),
+    waist:          parseFloat(document.getElementById('p-waist').value),
+    job_type:       document.getElementById('p-job').value.trim(),
+    department:     document.getElementById('p-dept').value.trim(),
+    work_years:     parseInt(document.getElementById('p-work-years').value) || 0,
+    work_months:    parseInt(document.getElementById('p-work-months').value) || 0,
+    computer_hours: parseFloat(document.getElementById('p-comp-hrs').value),
+    diseases:       [...document.querySelectorAll('.disease-cb:checked')].map(c => c.value),
+    diseases_other: document.getElementById('p-disease-other').value.trim(),
+  };
+}
+function collectChair() {
+  return {
+    chair_height_base: parseInt(hv('chair_height_base')), chair_under_desk: cb('chair_under_desk'),
+    pan_depth_base: parseInt(hv('pan_depth_base')), pan_non_adjustable: cb('pan_non_adjustable'),
+    armrest_base: parseInt(hv('armrest_base')), armrest_hard_surface: cb('armrest_hard_surface'),
+    armrest_too_wide: cb('armrest_too_wide'), armrest_non_adjustable: cb('armrest_non_adjustable'),
+    back_base: parseInt(hv('back_base')), back_surface_too_high: cb('back_surface_too_high'),
+    back_non_adjustable: cb('back_non_adjustable'), chair_duration: parseInt(hv('chair_duration')),
+  };
+}
+function collectMonitorPhone() {
+  return {
+    monitor_base: parseInt(hv('monitor_base')), monitor_too_far: cb('monitor_too_far'),
+    monitor_neck_twist: cb('monitor_neck_twist'), monitor_glare: cb('monitor_glare'),
+    monitor_no_doc_holder: cb('monitor_no_doc_holder'), monitor_non_adjustable: cb('monitor_non_adjustable'),
+    phone_base: parseInt(hv('phone_base')), phone_neck_shoulder: cb('phone_neck_shoulder'),
+    phone_no_hands_free: cb('phone_no_hands_free'), section_b_duration: parseInt(hv('section_b_duration')),
+  };
+}
+function collectMouseKeyboard() {
+  return {
+    mouse_base: parseInt(hv('mouse_base')), mouse_diff_surfaces: cb('mouse_diff_surfaces'),
+    mouse_pinch_grip: cb('mouse_pinch_grip'), mouse_palmrest: cb('mouse_palmrest'),
+    keyboard_base: parseInt(hv('keyboard_base')), keyboard_deviation: cb('keyboard_deviation'),
+    keyboard_too_high: cb('keyboard_too_high'), keyboard_overhead: cb('keyboard_overhead'),
+    keyboard_non_adjustable: cb('keyboard_non_adjustable'), section_c_duration: parseInt(hv('section_c_duration')),
+  };
+}
+
+document.getElementById('submit-btn').addEventListener('click', async () => {
+  const payload = {
+    personal: collectPersonal(), chair: collectChair(),
+    monitor_phone: collectMonitorPhone(), mouse_keyboard: collectMouseKeyboard(),
+  };
+  const overlay = document.getElementById('loading-overlay');
+  overlay.classList.remove('d-none');
+  document.getElementById('submit-btn').disabled = true;
+  try {
+    const resp = await fetch('/submit', {
+      method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(payload),
+    });
+    if (!resp.ok) throw new Error('Server error ' + resp.status);
+    const result = await resp.json();
+    sessionStorage.setItem('rosa_result', JSON.stringify(result));
+    overlay.classList.add('d-none');
+    renderResult(result);
+    showView('result');
+  } catch (err) {
+    overlay.classList.add('d-none');
+    document.getElementById('submit-btn').disabled = false;
+    alert('เกิดข้อผิดพลาด: ' + err.message);
+  }
+});
+
+function resetAndAssess() {
+  document.getElementById('rosa-form').reset();
+  document.querySelectorAll('.option-card.selected').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('input[type=hidden]').forEach(h => h.value = '');
+  currentStep = 1;
+  showView('assess');
+  showStep(1);
+}
+
+/* ══════════════════════════════════════════════
+   RESULT RENDERING
+══════════════════════════════════════════════ */
+function renderResult(result) {
+  if (!result) {
+    document.getElementById('view-result').innerHTML =
+      '<div class="container py-5"><div class="alert alert-warning text-center">' +
+      '<i class="bi bi-exclamation-triangle me-2"></i>ไม่พบข้อมูลผลการประเมิน ' +
+      '<button onclick="showView(\'assess\')" class="btn btn-sm btn-primary ms-2">กลับไปทำแบบประเมิน</button></div></div>';
+    return;
+  }
+  const p = result.personal || {};
+  const score = result.rosa_final_score;
+  const risk  = result.risk_level;
+  const colorMap = {ต่ำ:'success', ปานกลาง:'warning', สูง:'danger'};
+  const c = colorMap[risk] || 'secondary';
+
+  document.getElementById('r-name-date').textContent =
+    `${p.name}  |  ${new Date().toLocaleDateString('th-TH')}`;
+
+  const scoreEl = document.getElementById('r-final-score');
+  scoreEl.textContent = score;
+  scoreEl.className = `display-1 fw-bold text-${c}`;
+
+  const card = document.getElementById('r-score-card');
+  card.className = `card border-${c} border-3 shadow mb-4`;
+
+  document.getElementById('r-risk-badge').innerHTML =
+    `<span class="badge bg-${c} px-4 py-2 fs-5">ระดับความเสี่ยง: ${risk}</span>`;
+  document.getElementById('r-risk-desc').textContent   = result.risk_description || '';
+  document.getElementById('r-risk-action').textContent = '→ ' + (result.risk_action || '');
+
+  document.getElementById('r-sec-a').textContent = result.section_a_score;
+  document.getElementById('r-sec-b').textContent = result.section_b_score;
+  document.getElementById('r-sec-c').textContent = result.section_c_score;
+  document.getElementById('r-sec-d').textContent = result.section_d_score;
+
+  const rows = [
+    ['ความสูงเบาะ', result.chair_height_score], ['ความลึกเบาะ', result.pan_depth_score],
+    ['แขนพัก', result.armrest_score], ['พนักพิง', result.back_support_score],
+    ['รวมเบาะ (แกนแถว A)', result.seat_pan_combined], ['รวมแขน/หลัง (แกนคอลัมน์ A)', result.armrest_back_combined],
+    ['คะแนนตาราง A', result.table_a_score], ['หน้าจอ', result.monitor_score],
+    ['โทรศัพท์', result.phone_score], ['เมาส์', result.mouse_score], ['คีย์บอร์ด', result.keyboard_score],
+  ];
+  const tbody = document.getElementById('r-detail-body');
+  tbody.innerHTML = '';
+  rows.forEach(([lbl, val]) => {
+    tbody.insertAdjacentHTML('beforeend', `<tr><td>${lbl}</td><td class="text-center fw-bold">${val}</td></tr>`);
+  });
+
+  const tips = [];
+  if (result.chair_height_score > 1) tips.push('ปรับความสูงของเก้าอี้ให้เข่าอยู่มุม 90° และเท้าวางราบกับพื้น');
+  if (result.pan_depth_score > 1)    tips.push('ปรับความลึกเบาะให้มีช่องว่างระหว่างขอบเบาะกับหลังเข่าประมาณ 3 นิ้ว');
+  if (result.armrest_score > 1)      tips.push('ปรับแขนพักให้ข้อศอกอยู่ในแนวเดียวกับไหล่');
+  if (result.back_support_score > 1) tips.push('ตั้งค่าหมอนรองเอวให้อยู่ที่บริเวณเอว และเอนพนักพิง 95°-110°');
+  if (result.monitor_score > 1)      tips.push('ปรับหน้าจอให้อยู่ระดับสายตา ระยะห่าง 40-75 ซม. หลีกเลี่ยงแสงสะท้อน');
+  if (result.phone_score > 1)        tips.push('ใช้หูฟัง (Headset) แทนการหนีบโทรศัพท์');
+  if (result.mouse_score > 1)        tips.push('จัดวางเมาส์ให้อยู่ในแนวเดียวกับไหล่ ไม่ต้องเอื้อมมือ');
+  if (result.keyboard_score > 1)     tips.push('ปรับคีย์บอร์ดให้ข้อมือตรง พิจารณาใช้ที่รองข้อมือ');
+  if (tips.length === 0)             tips.push('สภาพแวดล้อมการทำงานของท่านอยู่ในเกณฑ์ดี');
+  document.getElementById('r-recommendations').innerHTML =
+    tips.map(t => `<div class="mb-2"><i class="bi bi-arrow-right-circle text-primary me-2"></i>${t}</div>`).join('');
+
+  const pdfBtn = document.getElementById('r-pdf-btn');
+  if (result.pdf_local) {
+    pdfBtn.href = `/download-pdf?path=${encodeURIComponent(result.pdf_local)}`;
+    pdfBtn.style.display = '';
+  } else if (result.pdf_url) {
+    pdfBtn.href = result.pdf_url;
+    pdfBtn.style.display = '';
+  } else {
+    pdfBtn.style.display = 'none';
+  }
+}
+
+// Init assess view when first shown via button
+document.querySelector('[onclick="showView(\'assess\')"]')
+  ?.addEventListener('click', () => { currentStep = 1; showStep(1); }, {once: false});
+
+/* ══════════════════════════════════════════════
+   ADMIN – AUTH
+══════════════════════════════════════════════ */
+let adminPW = sessionStorage.getItem('admin_pw') || '';
+
+function requireAdmin(nextView) {
+  if (adminPW) {
+    _origShowView(nextView);
+    if (nextView === 'dashboard') loadDashboard();
+    else if (nextView === 'admin-images') loadAdminImages();
+  } else {
+    sessionStorage.setItem('admin_next', nextView);
+    _origShowView('login');
+    setTimeout(() => document.getElementById('login-pw')?.focus(), 300);
+  }
+}
+
+async function doLogin() {
+  const pw = document.getElementById('login-pw').value;
+  const err = document.getElementById('login-error');
+  err.classList.add('d-none');
+  try {
+    const r = await fetch(`/api/dashboard?pw=${encodeURIComponent(pw)}`);
+    if (r.status === 403) { err.classList.remove('d-none'); return; }
+    adminPW = pw;
+    sessionStorage.setItem('admin_pw', pw);
+    document.getElementById('login-pw').value = '';
+    const next = sessionStorage.getItem('admin_next') || 'dashboard';
+    sessionStorage.removeItem('admin_next');
+    showView(next);
+    if (next === 'dashboard') renderDashboard(await r.json());
+    else if (next === 'admin-images') loadAdminImages();
+  } catch(e) {
+    err.textContent = 'เกิดข้อผิดพลาด: ' + e.message;
+    err.classList.remove('d-none');
+  }
+}
+
+function adminLogout() {
+  adminPW = '';
+  sessionStorage.removeItem('admin_pw');
+  showView('home');
+}
+
+function showAdminImages() {
+  requireAdmin('admin-images');
+}
+
+// Extend routing
+const _origShowView = showView;
+window.showView = function(name) {
+  if (name === 'dashboard' || name === 'admin-images') {
+    requireAdmin(name); return;
+  }
+  _origShowView(name);
+};
+
+// Single init entry point (called after all JS is defined)
+initView();
+
+/* ══════════════════════════════════════════════
+   ADMIN – DASHBOARD
+══════════════════════════════════════════════ */
+async function loadDashboard() {
+  document.getElementById('db-loading').classList.remove('d-none');
+  try {
+    const r = await fetch(`/api/dashboard?pw=${encodeURIComponent(adminPW)}`);
+    if (r.status === 403) { adminLogout(); return; }
+    renderDashboard(await r.json());
+  } catch(e) {
+    document.getElementById('db-loading').textContent = 'โหลดข้อมูลไม่ได้: ' + e.message;
+  }
+}
+
+function renderDashboard(records) {
+  document.getElementById('db-loading').classList.add('d-none');
+  const total = records.length;
+  const high  = records.filter(r => r['ระดับความเสี่ยง'] === 'สูง').length;
+  const med   = records.filter(r => r['ระดับความเสี่ยง'] === 'ปานกลาง').length;
+  const low   = records.filter(r => r['ระดับความเสี่ยง'] === 'ต่ำ').length;
+
+  document.getElementById('db-summary').innerHTML = `
+    <div class="col-6 col-md-3"><div class="card border-0 bg-primary text-white shadow-sm">
+      <div class="card-body text-center"><div class="h2 fw-bold">${total}</div><div>ทั้งหมด</div></div></div></div>
+    <div class="col-6 col-md-3"><div class="card border-0 bg-danger text-white shadow-sm">
+      <div class="card-body text-center"><div class="h2 fw-bold">${high}</div><div>ความเสี่ยงสูง</div></div></div></div>
+    <div class="col-6 col-md-3"><div class="card border-0 bg-warning text-dark shadow-sm">
+      <div class="card-body text-center"><div class="h2 fw-bold">${med}</div><div>ความเสี่ยงปานกลาง</div></div></div></div>
+    <div class="col-6 col-md-3"><div class="card border-0 bg-success text-white shadow-sm">
+      <div class="card-body text-center"><div class="h2 fw-bold">${low}</div><div>ความเสี่ยงต่ำ</div></div></div></div>`;
+
+  const tbody = document.getElementById('db-table-body');
+  tbody.innerHTML = records.length ? records.map((r, i) => {
+    const s   = parseInt(r['ROSA_Final']) || 0;
+    const lv  = r['ระดับความเสี่ยง'] || '';
+    const sc  = s >= 7 ? 'danger' : s >= 5 ? 'warning text-dark' : 'success';
+    const lc  = lv === 'สูง' ? 'danger' : lv === 'ปานกลาง' ? 'warning text-dark' : 'success';
+    const pdf = r['PDF_URL'] ? `<a href="${r['PDF_URL']}" target="_blank" class="btn btn-outline-danger btn-sm py-0"><i class="bi bi-file-earmark-pdf"></i></a>` : '';
+    return `<tr class="record-row" data-name="${r['ชื่อ-สกุล']||''}" data-dept="${r['แผนก']||''}" data-risk="${lv}">
+      <td>${i+1}</td><td class="text-nowrap">${r['วันที่']||''}</td><td>${r['ชื่อ-สกุล']||''}</td>
+      <td>${r['แผนก']||''}</td><td>${r['ประเภทงาน']||''}</td>
+      <td class="text-center fw-bold">${r['คะแนนSection_A']||''}</td>
+      <td class="text-center fw-bold">${r['คะแนนSection_B']||''}</td>
+      <td class="text-center fw-bold">${r['คะแนนSection_C']||''}</td>
+      <td class="text-center fw-bold">${r['คะแนนSection_D']||''}</td>
+      <td class="text-center"><span class="badge fs-6 bg-${sc}">${s}</span></td>
+      <td class="text-center"><span class="badge bg-${lc}">${lv}</span></td>
+      <td>${pdf}</td></tr>`;
+  }).join('') : '<tr><td colspan="12" class="text-center text-muted py-3">ยังไม่มีข้อมูล</td></tr>';
+
+  // Filter events
+  const si = document.getElementById('search-input');
+  const rf = document.getElementById('risk-filter');
+  const doFilter = () => {
+    const q = si.value.toLowerCase(), risk = rf.value;
+    document.querySelectorAll('.record-row').forEach(row => {
+      const show = (row.dataset.name.toLowerCase().includes(q) || row.dataset.dept.toLowerCase().includes(q))
+                && (!risk || row.dataset.risk === risk);
+      row.style.display = show ? '' : 'none';
+    });
+  };
+  si.oninput = doFilter; rf.onchange = doFilter;
+}
+
+function exportCSV() {
+  const table = document.getElementById('records-table');
+  if (!table) return;
+  const rows = [...table.querySelectorAll('tr')].map(r =>
+    [...r.querySelectorAll('th,td')].map(c => '"' + c.innerText.replace(/"/g,'""') + '"').join(',')
+  );
+  const blob = new Blob(['﻿' + rows.join('\n')], {type:'text/csv;charset=utf-8;'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = 'ROSA_results.csv'; a.click();
+}
+
+/* ══════════════════════════════════════════════
+   ADMIN – IMAGE MANAGER
+══════════════════════════════════════════════ */
+const IMG_W = 2376, IMG_H = 1836;
+let currentName = '', dragging = false, dragStart = {x:0,y:0}, cropRect = {x0:0,y0:0,x1:0,y1:0};
+
+async function loadAdminImages() {
+  const r = await fetch(`/api/crops?pw=${encodeURIComponent(adminPW)}`);
+  if (r.status === 403) { adminLogout(); return; }
+  const {crops, has_pdf} = await r.json();
+
+  document.getElementById('ai-no-pdf').classList.toggle('d-none', has_pdf);
+
+  const sections = {};
+  Object.entries(crops).forEach(([name, c]) => {
+    if (!sections[c.section]) sections[c.section] = [];
+    sections[c.section].push([name, c]);
+  });
+
+  const ts = Date.now();
+  document.getElementById('ai-grid').innerHTML = Object.entries(sections).map(([sec, items]) => `
+    <div class="card shadow-sm mb-4">
+      <div class="card-header bg-light fw-semibold py-2"><i class="bi bi-folder2 me-1"></i>${sec}</div>
+      <div class="card-body p-3"><div class="row g-3">
+        ${items.map(([name, c]) => `
+          <div class="col-6 col-md-3 col-lg-2">
+            <div class="border rounded p-2 text-center h-100" style="cursor:pointer;"
+                 onclick="openEditor('${name}',${c.x0},${c.y0},${c.x1},${c.y1},'${c.label}')">
+              <img src="/static/images/rosa/${name}.png?t=${ts}" id="thumb-${name}"
+                   class="img-fluid mb-1" style="max-height:90px;object-fit:contain;" alt="${c.label}">
+              <div class="small text-muted lh-sm mt-1">${c.label}</div>
+              ${c.type === 'modifier' ? '<span class="badge bg-secondary mt-1" style="font-size:.65rem;">modifier</span>' : ''}
+            </div>
+          </div>`).join('')}
+      </div></div>
+    </div>`).join('');
+}
+
+function openEditor(name, x0, y0, x1, y1, label) {
+  currentName = name;
+  cropRect = {x0,y0,x1,y1};
+  document.getElementById('ed-label').textContent = label;
+  document.getElementById('current-preview').src = `/static/images/rosa/${name}.png?t=${Date.now()}`;
+  fillCoords(x0, y0, x1, y1);
+  document.getElementById('ed-msg').textContent = '';
+  new bootstrap.Modal(document.getElementById('editorModal')).show();
+  document.getElementById('editorModal').addEventListener('shown.bs.modal', initCropCanvas, {once:true});
+}
+
+function initCropCanvas() {
+  const img    = document.getElementById('full-page-img');
+  const canvas = document.getElementById('crop-canvas');
+  canvas.width  = img.offsetWidth;
+  canvas.height = img.offsetHeight;
+  canvas.style.pointerEvents = 'auto';
+  img.style.pointerEvents = 'none';
+  drawCropRect(); drawCropPreview();
+
+  const HR = 7; // handle radius px
+  let dragMode = null; // 'draw' | 'move' | 'tl'|'tr'|'bl'|'br'|'tm'|'bm'|'ml'|'mr'
+  let moveStart = null, rectAtStart = null;
+
+  function scale() { return canvas.width / IMG_W; }
+  function toImg(d) { return Math.round(d / scale()); }
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function handles() {
+    const s = scale();
+    const sx = cropRect.x0*s, sy = cropRect.y0*s, ex = cropRect.x1*s, ey = cropRect.y1*s;
+    const mx = (sx+ex)/2, my = (sy+ey)/2;
+    return { tl:[sx,sy], tm:[mx,sy], tr:[ex,sy], ml:[sx,my], mr:[ex,my], bl:[sx,ey], bm:[mx,ey], br:[ex,ey] };
+  }
+
+  function hitHandle(mx, my) {
+    for (const [k,[hx,hy]] of Object.entries(handles()))
+      if (Math.hypot(mx-hx, my-hy) <= HR+4) return k;
+    return null;
+  }
+
+  function insideRect(mx, my) {
+    const s = scale();
+    return mx > cropRect.x0*s && mx < cropRect.x1*s && my > cropRect.y0*s && my < cropRect.y1*s;
+  }
+
+  function cursor(mx, my) {
+    const h = hitHandle(mx, my);
+    if (!h) return insideRect(mx,my) ? 'move' : 'crosshair';
+    return {tl:'nwse-resize',br:'nwse-resize',tr:'nesw-resize',bl:'nesw-resize',
+            tm:'ns-resize',bm:'ns-resize',ml:'ew-resize',mr:'ew-resize'}[h];
+  }
+
+  canvas.onmousemove = e => {
+    const r = canvas.getBoundingClientRect();
+    const mx = e.clientX-r.left, my = e.clientY-r.top;
+    canvas.style.cursor = cursor(mx, my);
+    if (!dragging) return;
+
+    const s = scale();
+    if (dragMode === 'draw') {
+      cropRect.x0 = toImg(Math.min(dragStart.x, mx));
+      cropRect.y0 = toImg(Math.min(dragStart.y, my));
+      cropRect.x1 = toImg(Math.max(dragStart.x, mx));
+      cropRect.y1 = toImg(Math.max(dragStart.y, my));
+    } else if (dragMode === 'move') {
+      const dx = toImg(mx - moveStart.x), dy = toImg(my - moveStart.y);
+      const w = rectAtStart.x1 - rectAtStart.x0, h = rectAtStart.y1 - rectAtStart.y0;
+      cropRect.x0 = clamp(rectAtStart.x0 + dx, 0, IMG_W - w);
+      cropRect.y0 = clamp(rectAtStart.y0 + dy, 0, IMG_H - h);
+      cropRect.x1 = cropRect.x0 + w; cropRect.y1 = cropRect.y0 + h;
+    } else {
+      const px = clamp(toImg(mx), 0, IMG_W), py = clamp(toImg(my), 0, IMG_H);
+      if (dragMode.includes('l')) cropRect.x0 = Math.min(px, cropRect.x1 - 5);
+      if (dragMode.includes('r')) cropRect.x1 = Math.max(px, cropRect.x0 + 5);
+      if (dragMode.includes('t')) cropRect.y0 = Math.min(py, cropRect.y1 - 5);
+      if (dragMode.includes('b')) cropRect.y1 = Math.max(py, cropRect.y0 + 5);
+    }
+    fillCoords(cropRect.x0, cropRect.y0, cropRect.x1, cropRect.y1);
+    drawCropRect(); drawCropPreview();
+  };
+
+  canvas.onmousedown = e => {
+    const r = canvas.getBoundingClientRect();
+    const mx = e.clientX-r.left, my = e.clientY-r.top;
+    dragging = true;
+    const h = hitHandle(mx, my);
+    if (h) {
+      dragMode = h;
+    } else if (insideRect(mx, my)) {
+      dragMode = 'move';
+      moveStart = {x:mx, y:my};
+      rectAtStart = {...cropRect};
+    } else {
+      dragMode = 'draw';
+      dragStart = {x:mx, y:my};
+      cropRect.x0 = toImg(mx); cropRect.y0 = toImg(my);
+      cropRect.x1 = cropRect.x0; cropRect.y1 = cropRect.y0;
+    }
+  };
+
+  document.onmouseup = () => { dragging = false; dragMode = null; };
+}
+
+function drawCropRect() {
+  const canvas = document.getElementById('crop-canvas');
+  const s = canvas.width / IMG_W;
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const sx = cropRect.x0*s, sy = cropRect.y0*s;
+  const sw = (cropRect.x1-cropRect.x0)*s, sh = (cropRect.y1-cropRect.y0)*s;
+  const ex = sx+sw, ey = sy+sh, mx = sx+sw/2, my = sy+sh/2;
+
+  // Dim overlay
+  ctx.fillStyle = 'rgba(0,0,0,0.45)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(sx, sy, sw, sh);
+
+  // Border
+  ctx.strokeStyle = '#1a73e8'; ctx.lineWidth = 2;
+  ctx.strokeRect(sx, sy, sw, sh);
+
+  // Rule-of-thirds grid
+  ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 1;
+  [1/3,2/3].forEach(t => {
+    ctx.beginPath(); ctx.moveTo(sx+sw*t,sy); ctx.lineTo(sx+sw*t,ey); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(sx,sy+sh*t); ctx.lineTo(ex,sy+sh*t); ctx.stroke();
+  });
+
+  // Handles (8 points)
+  const pts = [[sx,sy],[mx,sy],[ex,sy],[sx,my],[ex,my],[sx,ey],[mx,ey],[ex,ey]];
+  pts.forEach(([hx,hy]) => {
+    ctx.fillStyle = '#fff';
+    ctx.beginPath(); ctx.arc(hx,hy,6,0,Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#1a73e8'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(hx,hy,6,0,Math.PI*2); ctx.stroke();
+  });
+}
+
+function drawCropPreview() {
+  const img = document.getElementById('full-page-img');
+  const pc  = document.getElementById('preview-canvas');
+  const w = cropRect.x1-cropRect.x0, h = cropRect.y1-cropRect.y0;
+  if (w <= 0 || h <= 0) return;
+  pc.width = Math.min(w, 300); pc.height = Math.round(h * (pc.width / w));
+  pc.getContext('2d').drawImage(img, cropRect.x0, cropRect.y0, w, h, 0, 0, pc.width, pc.height);
+}
+
+function fillCoords(x0, y0, x1, y1) {
+  document.getElementById('ed-x0').value = x0; document.getElementById('ed-y0').value = y0;
+  document.getElementById('ed-x1').value = x1; document.getElementById('ed-y1').value = y1;
+  document.getElementById('ed-size-info').textContent = `ขนาด: ${x1-x0} × ${y1-y0} px`;
+}
+
+function coordChanged() {
+  cropRect.x0 = +document.getElementById('ed-x0').value;
+  cropRect.y0 = +document.getElementById('ed-y0').value;
+  cropRect.x1 = +document.getElementById('ed-x1').value;
+  cropRect.y1 = +document.getElementById('ed-y1').value;
+  document.getElementById('ed-size-info').textContent = `ขนาด: ${cropRect.x1-cropRect.x0} × ${cropRect.y1-cropRect.y0} px`;
+  drawCropRect(); drawCropPreview();
+}
+
+async function saveCrop() {
+  setEdMsg('กำลังบันทึก...', 'text-primary');
+  const res = await fetch('/admin/images/recrop', {
+    method: 'POST', headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({pw: adminPW, name: currentName,
+                          x0: cropRect.x0, y0: cropRect.y0, x1: cropRect.x1, y1: cropRect.y1})
+  });
+  const data = await res.json();
+  if (data.ok) { setEdMsg('บันทึกสำเร็จ!', 'text-success'); refreshThumb(data.src); }
+  else setEdMsg('เกิดข้อผิดพลาด: ' + (data.detail||'unknown'), 'text-danger');
+}
+
+async function uploadImage() {
+  const fileInput = document.getElementById('upload-file');
+  if (!fileInput.files.length) { alert('กรุณาเลือกไฟล์ก่อน'); return; }
+  setEdMsg('กำลัง Upload...', 'text-primary');
+  const fd = new FormData();
+  fd.append('pw', adminPW); fd.append('name', currentName); fd.append('file', fileInput.files[0]);
+  const res  = await fetch('/admin/images/upload', {method:'POST', body:fd});
+  const data = await res.json();
+  if (data.ok) { setEdMsg('Upload สำเร็จ!', 'text-success'); refreshThumb(data.src); }
+  else setEdMsg('Upload ล้มเหลว: ' + (data.detail||'unknown'), 'text-danger');
+}
+
+function refreshThumb(src) {
+  const url = src.split('?')[0] + '?t=' + Date.now();
+  const thumb = document.getElementById('thumb-' + currentName);
+  const prev  = document.getElementById('current-preview');
+  if (thumb) thumb.src = url;
+  if (prev)  prev.src  = url;
+}
+
+function setEdMsg(text, cls) {
+  const el = document.getElementById('ed-msg');
+  el.textContent = text; el.className = 'me-auto small ' + cls;
+}
+</script>
+{% endblock %}

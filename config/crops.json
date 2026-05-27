@@ -1,0 +1,326 @@
+{
+  "chair_height_good": {
+    "y0": 206,
+    "y1": 326,
+    "x0": 43,
+    "x1": 212,
+    "label": "เข่า 90 (1)",
+    "section": "A1 ความสูงเบาะ",
+    "type": "option"
+  },
+  "chair_height_low": {
+    "y0": 203,
+    "y1": 335,
+    "x0": 220,
+    "x1": 407,
+    "label": "เตี้ยเกิน (2)",
+    "section": "A1 ความสูงเบาะ",
+    "type": "option"
+  },
+  "chair_height_high": {
+    "y0": 206,
+    "y1": 332,
+    "x0": 404,
+    "x1": 592,
+    "label": "สูงเกิน (2)",
+    "section": "A1 ความสูงเบาะ",
+    "type": "option"
+  },
+  "chair_height_nofeet": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 563,
+    "x1": 750,
+    "label": "เท้าไม่ถึงพื้น (3)",
+    "section": "A1 ความสูงเบาะ",
+    "type": "option"
+  },
+  "chair_under_desk": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 750,
+    "x1": 940,
+    "label": "ขาชนใต้โต๊ะ (+1)",
+    "section": "A1 ความสูงเบาะ",
+    "type": "modifier"
+  },
+  "pan_depth_good": {
+    "y0": 465,
+    "y1": 660,
+    "x0": 0,
+    "x1": 188,
+    "label": "ความลึกพอดี (1)",
+    "section": "A2 ความลึกเบาะ",
+    "type": "option"
+  },
+  "pan_depth_long": {
+    "y0": 465,
+    "y1": 660,
+    "x0": 188,
+    "x1": 375,
+    "label": "ลึกเกิน (2)",
+    "section": "A2 ความลึกเบาะ",
+    "type": "option"
+  },
+  "pan_depth_short": {
+    "y0": 465,
+    "y1": 660,
+    "x0": 375,
+    "x1": 563,
+    "label": "ตื้นเกิน (2)",
+    "section": "A2 ความลึกเบาะ",
+    "type": "option"
+  },
+  "armrest_good": {
+    "y0": 830,
+    "y1": 1055,
+    "x0": 0,
+    "x1": 188,
+    "label": "แขนพักพอดี (1)",
+    "section": "A3 แขนพัก",
+    "type": "option"
+  },
+  "armrest_high": {
+    "y0": 830,
+    "y1": 1055,
+    "x0": 188,
+    "x1": 375,
+    "label": "สูง/ต่ำเกิน (2)",
+    "section": "A3 แขนพัก",
+    "type": "option"
+  },
+  "armrest_hard": {
+    "y0": 830,
+    "y1": 1055,
+    "x0": 375,
+    "x1": 563,
+    "label": "พื้นผิวแข็ง (+1)",
+    "section": "A3 แขนพัก",
+    "type": "modifier"
+  },
+  "armrest_wide": {
+    "y0": 830,
+    "y1": 1055,
+    "x0": 563,
+    "x1": 750,
+    "label": "กว้างเกิน (+1)",
+    "section": "A3 แขนพัก",
+    "type": "modifier"
+  },
+  "back_good": {
+    "y0": 1180,
+    "y1": 1400,
+    "x0": 0,
+    "x1": 188,
+    "label": "รองรับเอวดี (1)",
+    "section": "A4 พนักพิง",
+    "type": "option"
+  },
+  "back_no_lumbar": {
+    "y0": 1180,
+    "y1": 1400,
+    "x0": 188,
+    "x1": 375,
+    "label": "ไม่มีรองรับเอว (2)",
+    "section": "A4 พนักพิง",
+    "type": "option"
+  },
+  "back_angled": {
+    "y0": 1180,
+    "y1": 1400,
+    "x0": 375,
+    "x1": 563,
+    "label": "เอนมากเกิน (2)",
+    "section": "A4 พนักพิง",
+    "type": "option"
+  },
+  "back_none": {
+    "y0": 1180,
+    "y1": 1400,
+    "x0": 563,
+    "x1": 750,
+    "label": "ไม่มีพนักพิง (2)",
+    "section": "A4 พนักพิง",
+    "type": "option"
+  },
+  "back_surface_high": {
+    "y0": 1180,
+    "y1": 1400,
+    "x0": 750,
+    "x1": 940,
+    "label": "โต๊ะสูงเกิน (+1)",
+    "section": "A4 พนักพิง",
+    "type": "modifier"
+  },
+  "monitor_good": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 1188,
+    "x1": 1358,
+    "label": "หน้าจอพอดี (1)",
+    "section": "B1 หน้าจอ",
+    "type": "option"
+  },
+  "monitor_low": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 1358,
+    "x1": 1528,
+    "label": "ต่ำเกิน (2)",
+    "section": "B1 หน้าจอ",
+    "type": "option"
+  },
+  "monitor_high": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 1528,
+    "x1": 1698,
+    "label": "สูงเกิน (3)",
+    "section": "B1 หน้าจอ",
+    "type": "option"
+  },
+  "monitor_neck_twist": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 1698,
+    "x1": 1868,
+    "label": "บิดคอ (+1)",
+    "section": "B1 หน้าจอ",
+    "type": "modifier"
+  },
+  "monitor_glare": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 1868,
+    "x1": 2038,
+    "label": "แสงสะท้อน (+1)",
+    "section": "B1 หน้าจอ",
+    "type": "modifier"
+  },
+  "monitor_no_holder": {
+    "y0": 195,
+    "y1": 335,
+    "x0": 2038,
+    "x1": 2208,
+    "label": "ไม่มีที่วางเอกสาร (+1)",
+    "section": "B1 หน้าจอ",
+    "type": "modifier"
+  },
+  "phone_good": {
+    "y0": 545,
+    "y1": 665,
+    "x0": 1188,
+    "x1": 1408,
+    "label": "โทรศัพท์ปกติ (1)",
+    "section": "B2 โทรศัพท์",
+    "type": "option"
+  },
+  "phone_far": {
+    "y0": 545,
+    "y1": 665,
+    "x0": 1408,
+    "x1": 1808,
+    "label": "เอื้อมหยิบ (2)",
+    "section": "B2 โทรศัพท์",
+    "type": "option"
+  },
+  "phone_neck": {
+    "y0": 545,
+    "y1": 665,
+    "x0": 1808,
+    "x1": 2108,
+    "label": "หนีบคอ (+2)",
+    "section": "B2 โทรศัพท์",
+    "type": "modifier"
+  },
+  "mouse_good": {
+    "y0": 915,
+    "y1": 1055,
+    "x0": 1188,
+    "x1": 1358,
+    "label": "เมาส์พอดี (1)",
+    "section": "C1 เมาส์",
+    "type": "option"
+  },
+  "mouse_reach": {
+    "y0": 915,
+    "y1": 1055,
+    "x0": 1358,
+    "x1": 1528,
+    "label": "เอื้อมเมาส์ (2)",
+    "section": "C1 เมาส์",
+    "type": "option"
+  },
+  "mouse_diff_surfaces": {
+    "y0": 915,
+    "y1": 1055,
+    "x0": 1528,
+    "x1": 1698,
+    "label": "คนละระดับ (+2)",
+    "section": "C1 เมาส์",
+    "type": "modifier"
+  },
+  "mouse_pinch": {
+    "y0": 915,
+    "y1": 1055,
+    "x0": 1698,
+    "x1": 1868,
+    "label": "หยิกจับ (+1)",
+    "section": "C1 เมาส์",
+    "type": "modifier"
+  },
+  "mouse_palmrest": {
+    "y0": 915,
+    "y1": 1055,
+    "x0": 1868,
+    "x1": 2038,
+    "label": "ที่รองฝ่ามือ (+1)",
+    "section": "C1 เมาส์",
+    "type": "modifier"
+  },
+  "keyboard_good": {
+    "y0": 1235,
+    "y1": 1395,
+    "x0": 1188,
+    "x1": 1358,
+    "label": "ข้อมือตรง (1)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "option"
+  },
+  "keyboard_extended": {
+    "y0": 1235,
+    "y1": 1395,
+    "x0": 1358,
+    "x1": 1528,
+    "label": "ข้อมือแอ่น (2)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "option"
+  },
+  "keyboard_deviation": {
+    "y0": 1235,
+    "y1": 1395,
+    "x0": 1528,
+    "x1": 1698,
+    "label": "ข้อมือบิด (+1)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "modifier"
+  },
+  "keyboard_too_high": {
+    "y0": 1235,
+    "y1": 1395,
+    "x0": 1698,
+    "x1": 1868,
+    "label": "คีย์บอร์ดสูง (+1)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "modifier"
+  },
+  "keyboard_overhead": {
+    "y0": 1235,
+    "y1": 1395,
+    "x0": 1868,
+    "x1": 2038,
+    "label": "เอื้อมสูง (+1)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "modifier"
+  }
+}
