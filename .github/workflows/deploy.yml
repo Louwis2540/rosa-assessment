@@ -5,10 +5,10 @@ on:
     branches: [main]
 
 env:
-  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  PROJECT_ID: rosa-assessment-app
   REGION: asia-southeast1
   SERVICE: rosa-assessment
-  IMAGE: asia-southeast1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/rosa/rosa-assessment
+  IMAGE: asia-southeast1-docker.pkg.dev/rosa-assessment-app/rosa/rosa-assessment
 
 jobs:
   deploy:
