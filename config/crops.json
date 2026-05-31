@@ -322,5 +322,47 @@
     "label": "เอื้อมสูง (+1)",
     "section": "C2 คีย์บอร์ด",
     "type": "modifier"
+  },
+  "pan_non_adjustable": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ปรับความลึกเบาะไม่ได้ (+1)",
+    "section": "A2 ความลึกเบาะ",
+    "type": "modifier"
+  },
+  "armrest_non_adjustable": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ปรับแขนพักไม่ได้ (+1)",
+    "section": "A3 แขนพัก",
+    "type": "modifier"
+  },
+  "back_non_adjustable": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ปรับพนักพิงไม่ได้ (+1)",
+    "section": "A4 พนักพิง",
+    "type": "modifier"
+  },
+  "monitor_too_far": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ระยะไกลเกิน (+1)",
+    "section": "B1 หน้าจอ",
+    "type": "modifier"
+  },
+  "monitor_non_adjustable": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ปรับหน้าจอไม่ได้ (+1)",
+    "section": "B1 หน้าจอ",
+    "type": "modifier"
+  },
+  "phone_no_hands_free": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ไม่มี Hands-Free (+1)",
+    "section": "B2 โทรศัพท์",
+    "type": "modifier"
+  },
+  "keyboard_non_adjustable": {
+    "x0": 0, "y0": 0, "x1": 0, "y1": 0,
+    "label": "ปรับระดับแป้นพิมพ์ไม่ได้ (+1)",
+    "section": "C2 คีย์บอร์ด",
+    "type": "modifier"
   }
 }
