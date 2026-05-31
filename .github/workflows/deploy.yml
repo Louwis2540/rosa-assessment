@@ -9,6 +9,7 @@ env:
   REGION: asia-southeast1
   SERVICE: rosa-assessment
   IMAGE: asia-southeast1-docker.pkg.dev/rosa-assessment-app/rosa/rosa-assessment
+  GCS_BUCKET: rosa-assessment-images
 
 jobs:
   deploy:
@@ -39,7 +40,6 @@ jobs:
 
       - name: Deploy to Cloud Run
         env:
-          GOOGLE_CREDENTIALS_JSON: ${{ secrets.GOOGLE_CREDENTIALS_JSON }}
           GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
           GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
           ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
@@ -47,7 +47,6 @@ jobs:
           python3 -c "
           import os, yaml
           env = {
-              'GOOGLE_CREDENTIALS_JSON': os.environ['GOOGLE_CREDENTIALS_JSON'],
               'GOOGLE_SHEET_ID': os.environ['GOOGLE_SHEET_ID'],
               'GOOGLE_DRIVE_FOLDER_ID': os.environ['GOOGLE_DRIVE_FOLDER_ID'],
               'ADMIN_PASSWORD': os.environ['ADMIN_PASSWORD'],
@@ -63,4 +62,8 @@ jobs:
             --env-vars-file /tmp/env.yaml \
             --memory 512Mi \
             --min-instances 0 \
-            --max-instances 3
+            --max-instances 3 \
+            --execution-environment gen2 \
+            --service-account rosa-app@$PROJECT_ID.iam.gserviceaccount.com \
+            --add-volume=name=rosa-images,type=cloud-storage,bucket=$GCS_BUCKET \
+            --add-volume-mount=volume=rosa-images,mount-path=/app/static/images/rosa
