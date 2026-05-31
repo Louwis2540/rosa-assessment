@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from datetime import datetime
 from pathlib import Path
-import json, os, tempfile, io
+import json, os, tempfile, io, traceback
 
 CROPS_CONFIG = Path("config/crops.json")
 FULL_PAGE    = Path("static/images/rosa/page_1_full.png")
@@ -84,7 +84,7 @@ async def submit_assessment(request: Request):
     try:
         row_id = save_assessment(result, pdf_url)
     except Exception as e:
-        print(f"Sheets error: {e}")
+        print(f"Sheets error: {e}\n{traceback.format_exc()}")
 
     result["row_id"] = row_id
     result["pdf_url"] = pdf_url
@@ -117,7 +117,7 @@ async def api_dashboard(pw: str = ""):
     try:
         records = get_all_assessments()
     except Exception as e:
-        print(f"Dashboard fetch error: {e}")
+        print(f"Dashboard fetch error: {e}\n{traceback.format_exc()}")
     return JSONResponse(content=records)
 
 @app.get("/api/crops")
