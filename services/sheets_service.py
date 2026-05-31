@@ -23,13 +23,18 @@ SHEET_HEADERS = [
 
 def _get_creds():
     val = settings.google_credentials_json
-    if not val:
-        return None
-    if val.strip().startswith("{"):
-        return Credentials.from_service_account_info(json.loads(val), scopes=SCOPES)
-    if os.path.exists(val):
-        return Credentials.from_service_account_file(val, scopes=SCOPES)
-    return None
+    if val:
+        if val.strip().startswith("{"):
+            try:
+                return Credentials.from_service_account_info(json.loads(val), scopes=SCOPES)
+            except Exception as e:
+                print(f"Creds from JSON failed: {e}, falling back to ADC")
+        elif os.path.exists(val):
+            return Credentials.from_service_account_file(val, scopes=SCOPES)
+    # Use Application Default Credentials (Cloud Run service account identity)
+    import google.auth
+    creds, _ = google.auth.default(scopes=SCOPES)
+    return creds
 
 
 def _get_client():
