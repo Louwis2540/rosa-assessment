@@ -1499,6 +1499,13 @@ window.showView = function(name) {
 // Single init entry point (called after all JS is defined)
 initView();
 
+// Bust browser cache for assessment images whenever admin re-crops or uploads
+fetch('/api/image-version').then(r => r.json()).then(({v}) => {
+  document.querySelectorAll('img[src*="/static/images/rosa/"]').forEach(img => {
+    img.src = img.src.split('?')[0] + '?v=' + v;
+  });
+}).catch(() => {});  // non-fatal
+
 /* ══════════════════════════════════════════════
    ADMIN – DASHBOARD
 ══════════════════════════════════════════════ */

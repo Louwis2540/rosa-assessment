@@ -127,6 +127,16 @@ async def api_crops(pw: str = ""):
     return JSONResponse(content={"crops": _load_crops(), "has_pdf": FULL_PAGE.exists()})
 
 
+@app.get("/api/image-version")
+async def api_image_version():
+    max_mtime = 0
+    for f in ROSA_IMG_DIR.glob("*.png"):
+        mtime = f.stat().st_mtime
+        if mtime > max_mtime:
+            max_mtime = mtime
+    return JSONResponse({"v": int(max_mtime)})
+
+
 @app.get("/health")
 async def health():
     return {"status": "ok", "version": settings.app_version}
