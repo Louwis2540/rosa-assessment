@@ -41,7 +41,10 @@ def _get_client():
     creds = _get_creds()
     if creds is None:
         return None
-    return gspread.authorize(creds)
+    from google.auth.transport.requests import Request
+    if not creds.valid:
+        creds.refresh(Request())
+    return gspread.Client(auth=creds)
 
 
 def _get_or_create_sheet(gc):
