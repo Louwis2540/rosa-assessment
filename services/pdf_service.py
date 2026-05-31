@@ -51,16 +51,16 @@ RISK_EMOJI= {"ต่ำ": "●", "ปานกลาง": "●", "สูง": "�
 
 SCORE_ACTION = {
     "ต่ำ": (
-        "สถานีงานอยู่ในเกณฑ์ที่ยอมรับได้ในปัจจุบัน",
+        "สภาพแวดล้อมการทำงานอยู่ในเกณฑ์ที่ยอมรับได้ในปัจจุบัน",
         "ไม่จำเป็นต้องดำเนินการแก้ไขในทันที ควรติดตามและประเมินซ้ำเป็นระยะ",
     ),
     "ปานกลาง": (
-        "สถานีงานมีปัจจัยเสี่ยงที่อาจส่งผลต่อสุขภาพกล้ามเนื้อและกระดูก",
-        "ควรวางแผนปรับปรุงสถานีงานในระยะอันใกล้ และติดตามอาการผิดปกติ",
+        "สภาพแวดล้อมการทำงานมีปัจจัยเสี่ยงที่อาจส่งผลต่อสุขภาพกล้ามเนื้อและกระดูก",
+        "ควรวางแผนปรับปรุงสภาพแวดล้อมการทำงานในระยะอันใกล้ และติดตามอาการผิดปกติ",
     ),
     "สูง": (
-        "สถานีงานมีความเสี่ยงสูง จำเป็นต้องได้รับการแก้ไขโดยเร่งด่วน",
-        "ต้องดำเนินการปรับปรุงสถานีงานทันที และพิจารณาส่งพบแพทย์อาชีวเวชศาสตร์",
+        "สภาพแวดล้อมการทำงานมีความเสี่ยงสูง จำเป็นต้องได้รับการแก้ไขโดยเร่งด่วน",
+        "ต้องดำเนินการปรับปรุงสภาพแวดล้อมการทำงานทันที และพิจารณาส่งพบแพทย์อาชีวเวชศาสตร์",
     ),
 }
 
@@ -309,9 +309,6 @@ def generate_pdf(result: dict) -> str:
     # ═══════════════════════════════════════════════════════
     # 4. DETAILED SECTION SCORES
     # ═══════════════════════════════════════════════════════
-    story.append(_section_bar("3. ผลคะแนนรายส่วน"))
-    story.append(Spacer(1, 0.2*cm))
-
     # ─── Section A ───────────────────────────────────────
     a_data = [
         ["รายการ",                    "คะแนนย่อย",  "รายการ",                      "คะแนนย่อย"],
@@ -327,9 +324,9 @@ def generate_pdf(result: dict) -> str:
     a_final_sc = result.get("section_a_score", "-")
 
     def _detail_block(title, data, section_score, col_w=None):
+        """Returns list of flowables (not KeepTogether) so caller can wrap as needed."""
         if col_w is None:
-            col_w = [4.5*cm, 2*cm, 4.5*cm, 2*cm]  # adjusted to fit section header
-        # Section sub-header
+            col_w = [4.5*cm, 2*cm, 4.5*cm, 2*cm]
         sub_hdr = Table([
             [_p(title, size=11, bold=True, color=C_NAVY),
              _p(f"คะแนนส่วน = {section_score}", size=11, bold=True,
@@ -344,7 +341,6 @@ def generate_pdf(result: dict) -> str:
             ("RIGHTPADDING",  (-1,0), (-1,-1), 8),
             ("BOX",           (0,0), (-1,-1), 0.5, C_MGREY),
         ]))
-
         tbl = Table(data, colWidths=col_w)
         cmd = [
             ("FONTNAME",      (0,0), (-1,-1), FONT_REG),
@@ -363,11 +359,14 @@ def generate_pdf(result: dict) -> str:
             ("BACKGROUND",    (0,3), (-1,3),  C_LGREY),
         ]
         tbl.setStyle(TableStyle(cmd))
-        return KeepTogether([sub_hdr, tbl, Spacer(1, 0.3*cm)])
+        return [sub_hdr, tbl, Spacer(1, 0.3*cm)]
 
-    story.append(_detail_block(
-        "ส่วน A – เก้าอี้ (Chair)", a_data, a_final_sc
-    ))
+    # Keep section header with Section A so they don't split across pages
+    story.append(KeepTogether([
+        _section_bar("3. ผลคะแนนรายส่วน"),
+        Spacer(1, 0.2*cm),
+        *_detail_block("ส่วน A – เก้าอี้ (Chair)", a_data, a_final_sc),
+    ]))
 
     # ─── Section B ───────────────────────────────────────
     b_data = [
@@ -378,9 +377,9 @@ def generate_pdf(result: dict) -> str:
          "โทรศัพท์ (คะแนนแกน)", result.get("phone_axis","–")],
         ["Duration B",         result.get("section_b_duration","–"), "", ""],
     ]
-    story.append(_detail_block(
-        "ส่วน B – หน้าจอ + โทรศัพท์ (Monitor/Phone)", b_data,
-        result.get("section_b_score","-")
+    story.append(KeepTogether(
+        _detail_block("ส่วน B – หน้าจอ + โทรศัพท์ (Monitor/Phone)", b_data,
+                      result.get("section_b_score","-"))
     ))
 
     # ─── Section C ───────────────────────────────────────
@@ -392,9 +391,9 @@ def generate_pdf(result: dict) -> str:
          "คีย์บอร์ด (คะแนนแกน)", result.get("keyboard_axis","–")],
         ["Duration C",        result.get("section_c_duration","–"), "", ""],
     ]
-    story.append(_detail_block(
-        "ส่วน C – เมาส์ + คีย์บอร์ด (Mouse/Keyboard)", c_data,
-        result.get("section_c_score","-")
+    story.append(KeepTogether(
+        _detail_block("ส่วน C – เมาส์ + คีย์บอร์ด (Mouse/Keyboard)", c_data,
+                      result.get("section_c_score","-"))
     ))
 
     # ─── Section D ───────────────────────────────────────
